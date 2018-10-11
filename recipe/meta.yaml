@@ -1,4 +1,4 @@
-{% set version = '0.8-14' %}
+{% set version = '0.8-16' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -10,37 +10,45 @@ package:
 source:
   fn: amap_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/amap_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
-  sha256: b4752329457c250200171603b355bf9b4b64c8767777a233de7e7fb2d33fe3b7
+    - {{ cran_mirror }}/src/contrib/amap_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
+  sha256: d3775ad7f660581f7d2f070e426be95ae0d6743622943e6f5491988e5217d4e2
 
 build:
   merge_build_host: True  # [win]
-  number: 1
-  skip: true  # [win32]
-
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: Biobase
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('fortran') }}        # [unix]
-    - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ compiler('cxx') }}        # [unix]
-    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{ compiler('fortran') }}  # [not win]
+    - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}sed               # [win]
+    - {{posix}}grep              # [win]
+    - {{posix}}autoconf
+    - {{posix}}automake          # [not win]
+    - {{posix}}automake-wrapper  # [win]
+    - {{posix}}pkg-config
+    - {{posix}}make
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
+
   host:
     - r-base
 
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
 
 test:
   commands:
-    - $R -e "library('amap')"  # [not win]
+    - $R -e "library('amap')"           # [not win]
     - "\"%R%\" -e \"library('amap')\""  # [win]
 
 about:
@@ -52,6 +60,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - dpryan79
     - johanneskoester
     - bgruening
     - daler
