@@ -56,6 +56,7 @@ test:
 about:
   home: http://mulcyber.toulouse.inra.fr/projects/amap/
   license: GPL
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
   summary: Tools for Clustering and Principal Component Analysis (With robust methods, and parallelized
     functions).
   license_family: GPL
@@ -63,7 +64,3 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge/r
-    - dpryan79
-    - johanneskoester
-    - bgruening
-    - daler
