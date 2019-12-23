@@ -1,4 +1,4 @@
-{% set version = '0.8-16' %}
+{% set version = "0.8-18" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,11 +12,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/amap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
-  sha256: d3775ad7f660581f7d2f070e426be95ae0d6743622943e6f5491988e5217d4e2
+  sha256: 7afbbdd681a201121374821b733c9000ca1046a2353ee386507604c2c759ec7e
 
 build:
   merge_build_host: True  # [win]
-  number: 1002
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
