@@ -1,5 +1,4 @@
-{% set version = "0.8-18" %}
-
+{% set version = '0.8-18' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,7 +7,6 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: amap_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/amap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
@@ -21,31 +19,23 @@ build:
     - lib/R/lib/
     - lib/
 
-# Suggests: Biobase
 requirements:
   build:
-    - {{ compiler('c') }}        # [not win]
-    - {{ compiler('cxx') }}      # [not win]
-    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
-    - {{ compiler('m2w64_cxx') }}        # [win]
-    - {{ compiler('m2w64_fortran') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ compiler('fortran') }}        # [not win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{posix}}filesystem        # [win]
-    - {{posix}}sed               # [win]
-    - {{posix}}grep              # [win]
-    - {{posix}}autoconf
-    - {{posix}}automake          # [not win]
-    - {{posix}}automake-wrapper  # [win]
-    - {{posix}}pkg-config
     - {{posix}}make
+    - {{posix}}sed               # [win]
     - {{posix}}coreutils         # [win]
     - {{posix}}zip               # [win]
-
   host:
-    - r-base
-
+    - r-base >=3.6.0
   run:
-    - r-base
+    - r-base >=3.6.0
     - {{native}}gcc-libs         # [win]
 
 test:
@@ -54,13 +44,29 @@ test:
     - "\"%R%\" -e \"library('amap')\""  # [win]
 
 about:
-  home: http://mulcyber.toulouse.inra.fr/projects/amap/
-  license: GPL
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+  home: https://CRAN.R-project.org/package=amap
+  license: GPL-3
   summary: Tools for Clustering and Principal Component Analysis (With robust methods, and parallelized
     functions).
-  license_family: GPL
+  license_family: GPL3
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
 
 extra:
   recipe-maintainers:
     - conda-forge/r
+
+# Package: amap
+# Version: 0.8-18
+# Date: 2019-12-12
+# Title: Another Multidimensional Analysis Package
+# Author: Antoine Lucas
+# Maintainer: Antoine Lucas <antoinelucas@gmail.com>
+# Depends: R (>= 3.6.0)
+# Suggests: Biobase
+# Description: Tools for Clustering and Principal Component Analysis (With robust methods, and parallelized functions).
+# License: GPL
+# Packaged: 2019-12-12 18:27:09 UTC; antoine
+# Repository: CRAN
+# Date/Publication: 2019-12-12 19:00:02 UTC
+# NeedsCompilation: yes
