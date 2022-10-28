@@ -1,4 +1,4 @@
-{% set version = '0.8-18' %}
+{% set version = "0.8-19" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,12 +10,12 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/amap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
-  sha256: 7afbbdd681a201121374821b733c9000ca1046a2353ee386507604c2c759ec7e
+  sha256: 7349ea684b69eba0fcc48f78b7ac09a838d95d3bc0c6a94b6055605ac0291900
 
 build:
-  merge_build_host: True  # [win]
-  skip: True  # [r_base == "3.5.1"]
-  number: 3
+  merge_build_host: true  # [win]
+  skip: true  # [r_base == "3.5.1"]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -47,11 +47,10 @@ test:
 about:
   home: https://CRAN.R-project.org/package=amap
   license: GPL-3
-  summary: Tools for Clustering and Principal Component Analysis (With robust methods, and parallelized
-    functions).
+  summary: Tools for Clustering and Principal Component Analysis (With robust methods, and parallelized functions).
   license_family: GPL3
   license_file:
-    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
