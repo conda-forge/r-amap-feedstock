@@ -1,4 +1,4 @@
-{% set version = "0.8-19.1" %}
+{% set version = "0.8-20" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/amap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/amap/amap_{{ version }}.tar.gz
-  sha256: fff85152cae446b83a08e1b908bd48a87edd7689e2fc39ecc5b0e51b7988a071
+  sha256: 983bb7ec8f32d605013519c605499a9238215cd1376d3bcd7589998765f8c570
 
 build:
   number: 0
